@@ -2,25 +2,28 @@
 
 import { useEffect, useState } from 'react'
 
-export default function Header() {
-    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
+}
 
-    type BeforeInstallPromptEvent = Event & {
-    prompt: () => Promise<void>
-    }
+export default function Header() {
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
 
   useEffect(() => {
     const handler = (e: Event) => {
       e.preventDefault()
-      setDeferredPrompt(e)
+      setDeferredPrompt(e as BeforeInstallPromptEvent)
     }
+
     window.addEventListener('beforeinstallprompt', handler)
+
     return () => window.removeEventListener('beforeinstallprompt', handler)
   }, [])
 
   const handleInstall = () => {
-    if (deferredPrompt && 'prompt' in deferredPrompt) {
-      (deferredPrompt as any).prompt()
+    if (deferredPrompt) {
+      deferredPrompt.prompt()
     }
   }
 
@@ -35,9 +38,10 @@ export default function Header() {
           onClick={handleInstall}
           className="text-sm px-3 py-2 rounded-full border border-white hover:bg-white hover:text-black transition"
         >
-          Установить PWA
+          Установить приложение
         </button>
       </div>
     </header>
   )
 }
+
