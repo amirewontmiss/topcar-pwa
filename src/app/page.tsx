@@ -16,7 +16,7 @@ export default function HomePage() {
       <section className="flex flex-col items-center justify-center py-20 px-4 animate-fade-in">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 flex items-center gap-4">
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="TopCar logo"
             width={48}
             height={48}
