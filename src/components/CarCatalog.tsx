@@ -15,23 +15,23 @@ type Car = {
 const cars: Car[] = [
   {
     id: 1,
-    name: 'Mercedes S-Class',
+    name: 'Zeekr 001 White',
     price: 'от 85,000 ₸ / день',
-    image: '/cars/mercedes-s-class.jpg',
+    image: '/cars/zeekr1w.jpg',
     description: 'Эталон комфорта и стиля. Идеален для бизнес-поездок.',
   },
   {
     id: 2,
-    name: 'BMW 7 Series',
+    name: 'Dodge SRT',
     price: 'от 80,000 ₸ / день',
-    image: '/cars/bmw-7-series.jpg',
+    image: '/cars/dodgesrt.jpg',
     description: 'Спортивный дух и максимальное удобство.',
   },
   {
     id: 3,
-    name: 'Audi A8',
+    name: 'Mercedes-Benz G63 AMG',
     price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
+    image: '/cars/g63.jpg',
     description: 'Технологичность, тишина и немецкий люкс.',
   },
   // ... add the remaining cars here
