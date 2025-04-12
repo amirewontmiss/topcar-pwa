@@ -1,14 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import CarModal from './CarModal'
 
-const cars = [
+type Car = {
+  id: number
+  name: string
+  price: string
+  image: string
+  description?: string
+}
+
+const cars: Car[] = [
   {
     id: 1,
-    name: 'Zeekr 001 White',
+    name: 'Mercedes S-Class',
     price: 'от 85,000 ₸ / день',
-    image: '/cars/zeekr1w.jpg',
+    image: '/cars/mercedes-s-class.jpg',
     description: 'Эталон комфорта и стиля. Идеален для бизнес-поездок.',
   },
   {
@@ -25,60 +34,11 @@ const cars = [
     image: '/cars/audi-a8.jpg',
     description: 'Технологичность, тишина и немецкий люкс.',
   },
-  {
-    id: 4,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-  {
-    id: 5,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-{
-    id: 6,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-{
-    id: 7,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-{
-    id: 8,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-{
-    id: 9,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-{
-    id: 10,
-    name: 'Audi A8',
-    price: 'от 78,000 ₸ / день',
-    image: '/cars/audi-a8.jpg',
-    description: 'Технологичность, тишина и немецкий люкс.',
-  },
-  // add the rest of your 30 cars here, same structure
+  // ... add the remaining cars here
 ]
 
 export default function CarCatalog() {
-  const [selectedCar, setSelectedCar] = useState<any | null>(null)
+  const [selectedCar, setSelectedCar] = useState<Car | null>(null)
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
@@ -89,9 +49,11 @@ export default function CarCatalog() {
             key={car.id}
             className="bg-white/5 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-white/10"
           >
-            <img
+            <Image
               src={car.image}
               alt={car.name}
+              width={500}
+              height={300}
               className="h-48 w-full object-cover"
             />
             <div className="p-4 flex flex-col gap-2">

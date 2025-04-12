@@ -1,20 +1,27 @@
-import Header from "@/components/Header"
-import CarCatalog from "@/components/CarCatalog"
-import ServicesSection from "@/components/ServicesSection"
-import RentalCalculator from "@/components/RentalCalculator"
-import BookingForm from "@/components/BookingForm"
-import FAQ from "@/components/FAQ"
-import Subscription from "@/components/Subscription"
-import PWABonus from "@/components/PWABonus"
+import Image from 'next/image'
+import Header from '@/components/Header'
+import CarCatalog from '@/components/CarCatalog'
+import ServicesSection from '@/components/ServicesSection'
+import RentalCalculator from '@/components/RentalCalculator'
+import BookingForm from '@/components/BookingForm'
+import FAQ from '@/components/FAQ'
+import Subscription from '@/components/Subscription'
+import PWABonus from '@/components/PWABonus'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-black text-white font-sans">
+    <main className="min-h-screen bg-black text-white font-serif">
       <Header />
 
-      <section className="flex flex-col items-center justify-center py-20 px-4">
+      <section className="flex flex-col items-center justify-center py-20 px-4 animate-fade-in">
         <h1 className="text-5xl md:text-7xl font-bold mb-6 flex items-center gap-4">
-          <img src="/logo.png" alt="TopCar logo" className="w-12 h-12" />
+          <Image
+            src="/logo.svg"
+            alt="TopCar logo"
+            width={48}
+            height={48}
+            className="w-12 h-12"
+          />
           TopCar
         </h1>
         <p className="text-lg md:text-xl text-center max-w-2xl mb-8">

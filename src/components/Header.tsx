@@ -3,7 +3,11 @@
 import { useEffect, useState } from 'react'
 
 export default function Header() {
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
+    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
+
+    type BeforeInstallPromptEvent = Event & {
+    prompt: () => Promise<void>
+    }
 
   useEffect(() => {
     const handler = (e: Event) => {

@@ -1,16 +1,19 @@
 'use client'
 
 import { useEffect } from 'react'
+import Image from 'next/image'
+
+type Car = {
+  name: string
+  price: string
+  image: string
+  description?: string
+}
 
 type CarModalProps = {
   isOpen: boolean
   onClose: () => void
-  car: {
-    name: string
-    price: string
-    image: string
-    description?: string
-  }
+  car: Car
 }
 
 export default function CarModal({ isOpen, onClose, car }: CarModalProps) {
@@ -27,9 +30,11 @@ export default function CarModal({ isOpen, onClose, car }: CarModalProps) {
   return (
     <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-black border border-white/10 rounded-2xl shadow-xl w-full max-w-3xl overflow-hidden animate-fadeInUp">
-        <img
+        <Image
           src={car.image}
           alt={car.name}
+          width={1000}
+          height={400}
           className="w-full h-60 object-cover border-b border-white/10"
         />
         <div className="p-6">
@@ -52,3 +57,4 @@ export default function CarModal({ isOpen, onClose, car }: CarModalProps) {
     </div>
   )
 }
+
