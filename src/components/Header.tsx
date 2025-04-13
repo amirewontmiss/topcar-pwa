@@ -43,7 +43,7 @@ export default function Header() {
           className="text-base md:text-lg font-bold flex items-center gap-2"
         >
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="TopCar logo"
             width={24}
             height={24}
