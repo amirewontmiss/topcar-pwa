@@ -13,29 +13,25 @@ export default function HomePage() {
     <main className="min-h-screen bg-black text-white font-sans">
       <Header />
 
-      <section className="flex flex-col items-center justify-center py-32 px-6 md:py-48 animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-bold mb-8 flex items-center gap-4">
-          <Image
-            src="/logo.png"
-            alt="TopCar logo"
-            width={48}
-            height={48}
-            className="w-12 h-12"
-          />
+      
+      <section className="flex flex-col items-center justify-center py-28 md:py-40 px-4 text-center">
+      <h1 className="text-4xl md:text-6xl font-bold mb-4 flex items-center gap-3">
+          <img src="/logo.png" alt="TopCar logo" className="w-10 h-10 md:w-12 md:h-12" />
           TopCar
-        </h1>
-        <p className="text-lg md:text-xl text-center max-w-2xl mb-10">
+      </h1>
+      <p className="text-base md:text-lg text-white/70 max-w-xl mb-6 leading-relaxed">
           Арендуй автомобили в пару кликов. Минималистично. Быстро. Надежно.
-        </p>
-        <div className="flex gap-4">
+      </p>
+      <div className="flex flex-col md:flex-row gap-4">
           <button className="px-6 py-3 bg-white text-black rounded-full text-sm font-semibold transition hover:bg-gray-200">
-            Забронировать авто
+          Забронировать авто
           </button>
           <button className="px-6 py-3 border border-white text-white rounded-full text-sm font-semibold transition hover:bg-white hover:text-black">
-            Подробнее
+          Подробнее
           </button>
-        </div>
+      </div>
       </section>
+
 
       <CarCatalog />
       <ServicesSection />

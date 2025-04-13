@@ -1,44 +1,23 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
-type BeforeInstallPromptEvent = Event & {
-  prompt: () => Promise<void>
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
-}
+import Link from 'next/link'
 
 export default function Header() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
-
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault()
-      setDeferredPrompt(e as BeforeInstallPromptEvent)
-    }
-
-    window.addEventListener('beforeinstallprompt', handler)
-
-    return () => window.removeEventListener('beforeinstallprompt', handler)
-  }, [])
-
-  const handleInstall = () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt()
-    }
-  }
-
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-sm border-b border-white/10 text-white py-3 px-4 flex items-center justify-between">
-      <div className="text-lg font-bold">TopCar</div>
-      <div className="flex items-center gap-4">
-        <button className="text-sm px-4 py-2 rounded-full bg-white text-black hover:bg-gray-200 transition font-medium">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-sm border-b border-white/10 text-white px-4 py-2 flex items-center justify-between">
+      <div className="text-base md:text-lg font-bold flex items-center gap-2">
+        <img src="/logo.png" alt="TopCar logo" className="w-6 h-6" />
+        TopCar
+      </div>
+
+      <div className="flex items-center gap-2 md:gap-4">
+        <Link href="/download">
+          <button className="px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white text-sm md:text-base hover:bg-white hover:text-black transition font-medium">
+            Скачать
+          </button>
+        </Link>
+        <button className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white text-black text-sm md:text-base hover:bg-gray-200 transition font-medium">
           Войти
-        </button>
-        <button
-          onClick={handleInstall}
-          className="text-sm px-3 py-2 rounded-full border border-white hover:bg-white hover:text-black transition"
-        >
-          Установить приложение
         </button>
       </div>
     </header>

@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 type Car = {
   name: string
-  price: string
+  price: string | number
   image: string
   description?: string
 }
@@ -17,10 +17,14 @@ type CarModalProps = {
 }
 
 export default function CarModal({ isOpen, onClose, car }: CarModalProps) {
+  const [visible, setVisible] = useState(false)
+
   useEffect(() => {
     if (isOpen) {
+      setVisible(true)
       document.body.style.overflow = 'hidden'
     } else {
+      setVisible(false)
       document.body.style.overflow = ''
     }
   }, [isOpen])
@@ -29,7 +33,11 @@ export default function CarModal({ isOpen, onClose, car }: CarModalProps) {
 
   return (
     <div className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-black border border-white/10 rounded-2xl shadow-xl w-full max-w-3xl overflow-hidden animate-fadeInUp">
+      <div
+        className={`bg-black border border-white/10 rounded-2xl shadow-xl w-full max-w-3xl overflow-hidden transform transition-all duration-300 ${
+          visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}
+      >
         <Image
           src={car.image}
           alt={car.name}
@@ -47,7 +55,11 @@ export default function CarModal({ isOpen, onClose, car }: CarModalProps) {
               ×
             </button>
           </div>
-          <p className="text-sm text-white/80 mb-4">{car.price}</p>
+          <p className="text-sm text-white/80 mb-4">
+            {typeof car.price === 'number'
+              ? `${car.price.toLocaleString()} ₸ / день`
+              : car.price}
+          </p>
           <p className="text-white/70 text-sm leading-relaxed">
             {car.description ||
               'Премиум-комфорт, идеален для деловых поездок и мероприятий. В наличии последние модели с полным обслуживанием.'}
