@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Header from '@/components/Header'
 import CarCatalog from '@/components/CarCatalog'
 import ServicesSection from '@/components/ServicesSection'
