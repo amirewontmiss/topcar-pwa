@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import LoginModal from './LoginModal'
 
 const capitalize = (name: string) =>
   name.charAt(0).toUpperCase() + name.slice(1)
 
 export default function Header() {
   const [user, setUser] = useState<{ name?: string; phone?: string } | null>(null)
+  const [showLogin, setShowLogin] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -55,13 +57,15 @@ export default function Header() {
           </button>
         ) : (
           <button
-            onClick={() => router.push('/')}
+            onClick={() => setShowLogin(true)}
             className="px-5 py-2 border border-white rounded-full text-sm hover:bg-white hover:text-black transition"
           >
             Войти
           </button>
         )}
       </div>
+
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
     </header>
   )
 }
