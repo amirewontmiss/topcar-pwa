@@ -23,12 +23,12 @@ export default function LoginModal({ onClose }: Props) {
     if (isSignup) {
       const { data, error } = await supabase.from('users').insert([
         { name, email, phone, password },
-      ])
+      ]).select()
 
-      if (error) {
+      if (error || !data || !data[0]) {
         setError('Ошибка при регистрации')
       } else {
-        localStorage.setItem('topcar-user', JSON.stringify({ name, email, phone }))
+        localStorage.setItem('topcar-user', JSON.stringify(data[0]))
         window.location.reload()
       }
     } else {
