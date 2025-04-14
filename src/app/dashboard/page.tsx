@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import Image from 'next/image'
 
 type Booking = {
   id: string
@@ -26,7 +27,7 @@ export default function DashboardPage() {
     } else {
       router.push('/')
     }
-  }, [])
+  }, [router])
 
   const fetchBookings = async (phone: string) => {
     const { data, error } = await supabase
@@ -56,7 +57,6 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
-        {/* 👤 Profile */}
         <section className="md:col-span-1 bg-white/5 border border-white/10 rounded-xl p-5 shadow-sm">
           <h2 className="text-xl font-semibold mb-4">👤 Профиль</h2>
           <div className="space-y-2 text-white/80">
@@ -66,7 +66,6 @@ export default function DashboardPage() {
           </div>
         </section>
 
-        {/* 📅 Bookings */}
         <section className="md:col-span-2 bg-white/5 border border-white/10 rounded-xl p-5 shadow-sm">
           <h2 className="text-xl font-semibold mb-4">📅 История бронирований</h2>
 
@@ -80,9 +79,11 @@ export default function DashboardPage() {
                   className="bg-white/10 rounded-lg overflow-hidden border border-white/10 shadow-md"
                 >
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 p-4 items-center">
-                    <img
+                    <Image
                       src={`/cars/${b.car_name.toLowerCase().replaceAll(' ', '')}.jpg`}
                       alt={b.car_name}
+                      width={100}
+                      height={75}
                       className="w-full h-24 object-cover rounded-md col-span-1"
                     />
                     <div className="col-span-2 sm:col-span-3 space-y-1">

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import LoginModal from './LoginModal'
 
@@ -11,7 +10,6 @@ const capitalize = (name: string) =>
 export default function Header() {
   const [user, setUser] = useState<{ name?: string; phone?: string } | null>(null)
   const [showLogin, setShowLogin] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const stored = localStorage.getItem('topcar-user')
@@ -39,12 +37,7 @@ export default function Header() {
 
         {user && (
           <p className="text-white/60 text-sm hidden sm:block">
-            Привет,{' '}
-            {user.name
-              ? capitalize(user.name)
-              : user.phone
-              ? `+${user.phone}`
-              : 'Гость'}
+            Привет, {user.name ? capitalize(user.name) : `+${user.phone}`}
           </p>
         )}
 
