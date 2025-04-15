@@ -57,7 +57,6 @@ export default function CarCatalog() {
 
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  // Load filters from localStorage
   useEffect(() => {
     const stored = localStorage.getItem('topcar-filters')
     if (stored) {
@@ -68,7 +67,6 @@ export default function CarCatalog() {
     }
   }, [])
 
-  // Save filters to localStorage
   useEffect(() => {
     localStorage.setItem(
       'topcar-filters',
@@ -76,7 +74,6 @@ export default function CarCatalog() {
     )
   }, [maxPrice, selectedBrand, selectedClass])
 
-  // Swipe indicator disappears after scroll
   useEffect(() => {
     const scrollEl = scrollRef.current
     if (!scrollEl) return
@@ -100,7 +97,9 @@ export default function CarCatalog() {
 
   return (
     <section className="pt-20 pb-10 px-4 sm:px-6 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-center sm:text-left">Каталог автомобилей</h2>
+      <h2 className="text-4xl font-extrabold mb-8 text-center sm:text-left tracking-tight text-white">
+        Каталог автомобилей
+      </h2>
 
       {/* Toggle filters (mobile) */}
       <div className="md:hidden mb-4 flex justify-end">
@@ -113,7 +112,7 @@ export default function CarCatalog() {
       </div>
 
       {/* Filters panel */}
-      <div className={`bg-white/5 p-4 rounded-lg mb-6 z-40 ${showFilters ? 'block' : 'hidden'} md:block sticky top-20`}>
+      <div className={`bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl mb-6 z-40 ${showFilters ? 'block' : 'hidden'} md:block sticky top-20`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm mb-2">Максимальная цена: {maxPrice.toLocaleString()} ₸</label>
@@ -163,7 +162,7 @@ export default function CarCatalog() {
         {filteredCars.map((car) => (
           <div
             key={car.id}
-            className="bg-white/5 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-white/10 animate-fade-in"
+            className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-md hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300"
           >
             <Image
               src={car.image}
@@ -178,13 +177,13 @@ export default function CarCatalog() {
               <div className="flex flex-col sm:flex-row gap-2 mt-2">
                 <button
                   onClick={() => setSelectedCar(car)}
-                  className="text-sm px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition"
+                  className="text-sm px-4 py-2 bg-white text-black rounded-full font-semibold hover:bg-[#d4af37] hover:text-white transition"
                 >
                   Подробнее
                 </button>
                 <button
                   onClick={() => setBookingCar(car)}
-                  className="text-sm px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
+                  className="text-sm px-4 py-2 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-black transition"
                 >
                   Забронировать
                 </button>
@@ -209,7 +208,7 @@ export default function CarCatalog() {
           {filteredCars.map((car) => (
             <div
               key={car.id}
-              className="flex-shrink-0 w-72 bg-white/5 rounded-xl overflow-hidden shadow-lg border border-white/10 snap-center animate-fade-in"
+              className="flex-shrink-0 w-72 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-md snap-center hover:scale-[1.02] transition-transform duration-300"
             >
               <Image
                 src={car.image}
@@ -224,13 +223,13 @@ export default function CarCatalog() {
                 <div className="flex gap-2 mt-2">
                   <button
                     onClick={() => setSelectedCar(car)}
-                    className="text-sm px-4 py-2 bg-white text-black rounded-full hover:bg-gray-200 transition"
+                    className="text-sm px-4 py-2 bg-white text-black rounded-full font-semibold hover:bg-[#d4af37] hover:text-white transition"
                   >
                     Подробнее
                   </button>
                   <button
                     onClick={() => setBookingCar(car)}
-                    className="text-sm px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
+                    className="text-sm px-4 py-2 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-black transition"
                   >
                     Бронь
                   </button>

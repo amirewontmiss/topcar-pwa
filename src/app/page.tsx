@@ -27,31 +27,55 @@ export default function HomePage() {
     <main className="min-h-screen bg-black text-white font-sans">
       <Header />
 
-      <section className="flex flex-col items-center justify-center py-20 px-4 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 flex items-center gap-4">
-          <Image src="/logo.png" alt="TopCar logo" width={48} height={48} />
-          TopCar
-        </h1>
-        <p className="text-lg md:text-xl max-w-2xl mb-8">
-          Арендуй автомобили в пару кликов. Минималистично. Быстро. Надежно.
-        </p>
+      {/* ULTRA LUXURY HERO SECTION */}
+      <section className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-fixed">
+        <Image
+          src="/hero-luxury.jpg"
+          alt="Luxury Car Hero"
+          layout="fill"
+          objectFit="cover"
+          priority
+          className="absolute inset-0 z-0 opacity-70 brightness-[1.35] contrast-125"
+        />
 
-        <div className="flex flex-wrap gap-4 justify-center">
-          <button className="px-6 py-3 bg-white text-black rounded-full text-sm font-semibold transition hover:bg-gray-200">
-            Забронировать авто
-          </button>
-          <button className="px-6 py-3 border border-white text-white rounded-full text-sm font-semibold transition hover:bg-white hover:text-black">
-            Подробнее
-          </button>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90" />
 
-          {loggedIn && (
-            <button
-              onClick={() => router.push('/dashboard')}
-              className="px-6 py-3 bg-white text-black rounded-full text-sm font-semibold transition hover:bg-gray-200"
+        <div className="relative z-10 max-w-4xl px-6">
+          <h1
+          className="text-5xl md:text-7xl font-extrabold tracking-tight text-white relative inline-block overflow-hidden"
+>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#f5f5f5] animate-shine">
+              TopCar
+          </span>
+          </h1>
+          <p className="mt-4 text-lg md:text-2xl text-white/80 font-light">
+            Премиум аренда автомобилей. Без компромиссов.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#car-catalog"
+              className="px-6 py-3 bg-white text-black rounded-full text-sm font-semibold hover:bg-gray-200 transition"
             >
-              Перейти в личный кабинет
+              Забронировать
+            </a>
+            <button className="px-6 py-3 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition">
+              Подробнее
             </button>
-          )}
+
+            {loggedIn && (
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="px-6 py-3 bg-white text-black rounded-full text-sm font-semibold transition hover:bg-gray-200"
+              >
+                Личный кабинет
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="absolute bottom-6 text-white/70 text-2xl animate-bounce">
+          ↓
         </div>
       </section>
 
