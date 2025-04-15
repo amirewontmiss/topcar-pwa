@@ -1,62 +1,60 @@
+'use client'
+
+import Image from 'next/image'
+import Link from 'next/link'
+
 export default function Footer() {
   return (
-    <footer className="bg-black text-white/80 pt-16 pb-10 px-6 border-t border-white/10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
-        
-        {/* Branding */}
+    <footer className="bg-black text-white border-t border-white/10 py-12 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        {/* Logo & About */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <img src="/logo.png" alt="TopCar" className="h-8 w-8" />
-            <span className="text-xl font-semibold tracking-wide text-white">TOPCAR</span>
+            <Image src="/logo.svg" alt="TopCar Logo" width={36} height={36} />
+            <h3 className="text-xl font-semibold">TOPCAR</h3>
           </div>
-          <p className="text-sm text-white/60">
-            Премиальная аренда автомобилей. Элегантность, мощь и комфорт — без компромиссов.
+          <p className="text-white/60 text-sm max-w-xs">
+            Премиальная аренда автомобилей без компромиссов. Мы работаем круглосуточно.
           </p>
         </div>
 
         {/* Навигация */}
         <div>
-          <h4 className="font-semibold mb-4 text-white">Разделы</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#catalog" className="hover:text-white transition">Автопарк</a></li>
-            <li><a href="#terms" className="hover:text-white transition">Условия</a></li>
-            <li><a href="#services" className="hover:text-white transition">Услуги</a></li>
-            <li><a href="#contacts" className="hover:text-white transition">Контакты</a></li>
+          <h4 className="text-white font-semibold mb-2">Разделы</h4>
+          <ul className="space-y-1 text-white/70 text-sm">
+            <li><Link href="#car-catalog">Автопарк</Link></li>
+            <li><Link href="#services">Услуги</Link></li>
+            <li><Link href="#faq">FAQ</Link></li>
+            <li><Link href="#contacts">Контакты</Link></li>
           </ul>
         </div>
 
         {/* Контакты */}
         <div>
-          <h4 className="font-semibold mb-4 text-white">Контакты</h4>
-          <ul className="space-y-2 text-sm">
+          <h4 className="text-white font-semibold mb-2">Контакты</h4>
+          <ul className="space-y-1 text-white/70 text-sm">
             <li>📍 Алматы, Казахстан</li>
             <li>📞 +7 (700) 000 00 00</li>
-            <li>✉️ info@topcar.kz</li>
-            <li>🕓 Работаем 24/7</li>
+            <li>📧 hello@topcar.kz</li>
+            <li>🕒 Работаем 24/7</li>
           </ul>
         </div>
 
-        {/* Поддержка и Соц. сети */}
+        {/* Поддержка */}
         <div>
-          <h4 className="font-semibold mb-4 text-white">Нужна помощь?</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-white transition">💬 Напишите в WhatsApp</a></li>
-            <li><a href="#" className="hover:text-white transition">📨 Напишите в Telegram</a></li>
+          <h4 className="text-white font-semibold mb-2">Поддержка</h4>
+          <ul className="space-y-1 text-white/70 text-sm">
+            <li><a href="https://wa.me/77000000000" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a></li>
+            <li><a href="https://t.me/topcar_support" target="_blank" rel="noopener noreferrer">📨 Telegram</a></li>
+            <li><a href="mailto:hello@topcar.kz">📧 Написать нам</a></li>
           </ul>
-
-          <h4 className="font-semibold mt-6 mb-2 text-white">Подписывайтесь</h4>
-          <div className="flex gap-4 text-xl">
-            <a href="#" className="hover:text-white transition">📸</a>
-            <a href="#" className="hover:text-white transition">🎥</a>
-            <a href="#" className="hover:text-white transition">📘</a>
-            <a href="#" className="hover:text-white transition">🎵</a>
-          </div>
         </div>
       </div>
 
-      <div className="text-xs text-white/30 text-center mt-12">
-        © {new Date().getFullYear()} TopCar. Все права защищены.
+      <div className="text-center text-white/40 text-sm mt-10">
+        © 2025 TopCar. Все права защищены.
       </div>
     </footer>
   )
 }
+
