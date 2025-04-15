@@ -5,8 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import LoginModal from './LoginModal'
 
-const capitalize = (name: string) => name.charAt(0).toUpperCase() + name.slice(1)
-
 export default function Header() {
   const [user, setUser] = useState<{ name?: string; phone?: string } | null>(null)
   const [showLogin, setShowLogin] = useState(false)
