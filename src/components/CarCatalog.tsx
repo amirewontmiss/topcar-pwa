@@ -1,3 +1,4 @@
+// src/components/CarCatalog.tsx
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
@@ -157,7 +158,7 @@ export default function CarCatalog() {
         </div>
       </div>
 
-      {/* Grid for desktop */}
+      {/* Desktop cards */}
       <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredCars.map((car) => (
           <div
@@ -193,14 +194,13 @@ export default function CarCatalog() {
         ))}
       </div>
 
-      {/* Swipeable Mobile Carousel */}
+      {/* Mobile carousel */}
       <div className="sm:hidden relative">
         {showSwipeHint && (
           <div className="absolute top-2 right-4 z-10 text-xs text-white/50 animate-pulse">
             ⬅ Листай
           </div>
         )}
-
         <div
           ref={scrollRef}
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4"
@@ -240,7 +240,7 @@ export default function CarCatalog() {
         </div>
       </div>
 
-      {/* Modals */}
+      {/* Popups */}
       {selectedCar && (
         <CarModal
           isOpen={true}
@@ -248,7 +248,6 @@ export default function CarCatalog() {
           car={selectedCar}
         />
       )}
-
       {bookingCar && (
         <BookingPopup
           isOpen={true}

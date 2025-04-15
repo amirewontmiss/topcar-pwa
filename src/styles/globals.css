@@ -7,6 +7,9 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #000;
   color: white;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
 }
 
 @font-face {
@@ -94,4 +97,11 @@ body {
 
 .animate-fade-in-up {
   animation: fade-in-up 0.4s ease-out both;
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  p, button, a, input { font-size: 0.875rem; }
 }

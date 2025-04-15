@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import LoginModal from './LoginModal'
+import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid'
 
 export default function Header() {
   const [user, setUser] = useState<{ name?: string; phone?: string } | null>(null)
   const [showLogin, setShowLogin] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('topcar-user')
@@ -22,15 +24,14 @@ export default function Header() {
   }
 
   return (
-    <header className="relative z-40 flex justify-between items-center px-6 py-4 border-b border-white/10 bg-black text-white">
-
-      {/* Left Logo */}
+    <header className="relative z-50 bg-black text-white border-b border-white/10 px-4 sm:px-6 py-4 flex justify-between items-center">
+      {/* Logo */}
       <div className="flex items-center gap-2">
         <Image src="/logo.png" alt="TopCar Logo" width={32} height={32} />
         <span className="text-xl font-bold tracking-wide text-gradient-gold">TOPCAR</span>
       </div>
 
-      {/* Center Navigation */}
+      {/* Desktop Nav */}
       <nav className="hidden lg:flex gap-6 text-sm">
         <a href="#" className="hover:text-white/80 transition">Автопарк ▾</a>
         <a href="#" className="hover:text-white/80 transition">Условия ▾</a>
@@ -39,24 +40,10 @@ export default function Header() {
       </nav>
 
       {/* Right Side */}
-      <div className="flex items-center gap-4 text-sm">
-        <span className="hidden sm:block text-white/70 underline underline-offset-2">Алматы ▾</span>
-        <span className="hidden sm:block text-white/70">₸ KZT ▾</span>
-
-        <div className="flex items-center gap-2 text-lg">
-          <button className="hover:opacity-70 transition" title="Избранное">🤍</button>
-          <button className="hover:opacity-70 transition" title="WhatsApp">🟢</button>
-          <button className="hover:opacity-70 transition" title="Telegram">📨</button>
-        </div>
-
-        <div className="text-right hidden md:block">
-          <p className="text-white text-sm font-medium">+7 (700) 000 00 00 ▾</p>
-          <p className="text-xs text-white/60">работаем 24/7</p>
-        </div>
-
+      <div className="flex items-center gap-3 text-sm">
         <Link
           href="/download"
-          className="px-4 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition hidden sm:block"
+          className="px-4 py-2 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-black transition hidden sm:block"
         >
           Скачать
         </Link>
@@ -64,19 +51,54 @@ export default function Header() {
         {user ? (
           <button
             onClick={handleLogout}
-            className="px-4 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition"
+            className="px-4 py-2 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-black transition"
           >
             Выйти
           </button>
         ) : (
           <button
             onClick={() => setShowLogin(true)}
-            className="px-4 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition"
+            className="px-4 py-2 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-black transition"
           >
             Войти
           </button>
         )}
+
+        {/* Burger Menu Button (Mobile) */}
+        <button
+          className="lg:hidden ml-2"
+          onClick={() => setMobileNavOpen(true)}
+        >
+          <Bars3Icon className="w-6 h-6" />
+        </button>
       </div>
+
+      {/* Mobile Nav Drawer */}
+      {mobileNavOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex flex-col items-end">
+          <div className="w-3/4 max-w-xs bg-black h-full p-6 text-white flex flex-col">
+            <div className="flex justify-between items-center mb-6">
+              <span className="text-lg font-bold">Меню</span>
+              <button onClick={() => setMobileNavOpen(false)}>
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </div>
+            <nav className="flex flex-col gap-4 text-base font-medium">
+              <a href="#" className="hover:text-white/80 transition">Автопарк</a>
+              <a href="#" className="hover:text-white/80 transition">Условия</a>
+              <a href="#" className="hover:text-white/80 transition">Услуги</a>
+              <a href="#" className="hover:text-white/80 transition">Контакты</a>
+              <Link
+                href="/download"
+                className="mt-6 inline-block px-4 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition"
+              >
+                Скачать приложение
+              </Link>
+            </nav>
+          </div>
+          <div className="flex-1 w-full" onClick={() => setMobileNavOpen(false)} />
+        </div>
+      )}
 
       {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
     </header>

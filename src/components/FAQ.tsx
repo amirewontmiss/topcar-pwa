@@ -13,8 +13,8 @@ export default function FAQ() {
           <summary className="cursor-pointer font-semibold text-white text-lg list-none group-open:mb-3 transition">
             {question}
           </summary>
-          <p className="text-sm text-white/70 leading-relaxed">
-            Здесь будет подробный ответ на ваш вопрос.
+          <p className="text-sm text-white/70 leading-relaxed mt-2">
+            Здесь будет подробный ответ на ваш вопрос. Мы предоставим всё необходимое, чтобы вы чувствовали себя уверенно на каждом этапе аренды.
           </p>
         </details>
       ))}

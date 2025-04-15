@@ -6,15 +6,17 @@ export default function PWABonus() {
       </h2>
 
       <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl shadow-sm">
-        <p className="text-white/80 mb-4 text-base leading-relaxed">
-          Установите приложение и получите <span className="text-white font-bold">скидку 30%</span> на первую аренду.
-          Используйте промокод: <strong className="text-[#d4af37]">TOPCAR30</strong>
+        <p className="text-white/80 text-sm leading-relaxed mb-4">
+          Установите наше приложение как PWA и получите <span className="text-white font-semibold">скидку 30%</span> на первую аренду.
+          Просто нажмите «Установить» в браузере и используйте промокод:
         </p>
 
-        <div className="mt-6 bg-white/10 border border-white/10 p-5 rounded-xl">
-          <p className="text-sm text-white/70">
-            📅 Ближайшие аренды будут отображаться здесь.
-          </p>
+        <div className="bg-black border border-white/10 rounded-lg p-4 text-center mb-4">
+          <p className="text-xl font-bold text-[#d4af37] tracking-widest">TOPCAR30</p>
+        </div>
+
+        <div className="bg-white/10 p-4 rounded-lg mt-6">
+          <p className="text-sm text-white/70">📅 Ближайшие аренды будут отображаться здесь.</p>
         </div>
       </div>
     </section>
