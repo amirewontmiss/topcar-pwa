@@ -86,3 +86,12 @@ body {
   color: transparent;
   animation: shine 3.5s ease-in-out infinite;
 }
+
+@keyframes fade-in-up {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}

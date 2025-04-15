@@ -52,8 +52,8 @@ export default function LoginModal({ onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">
-      <div className="bg-black border border-white/10 rounded-xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6">
+      <div className="bg-black border border-white/10 rounded-2xl p-8 w-full max-w-md shadow-xl backdrop-blur-sm">
+        <h2 className="text-2xl font-bold mb-6 tracking-tight">
           {isSignup ? 'Регистрация в TopCar' : 'Вход в TopCar'}
         </h2>
 
@@ -62,7 +62,7 @@ export default function LoginModal({ onClose }: Props) {
             <input
               type="text"
               placeholder="Имя"
-              className="w-full p-3 rounded bg-white/5 text-white"
+              className="w-full p-3 rounded-lg bg-white/5 text-white placeholder-white/40 outline-none focus:ring-2 focus:ring-white/30 transition"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -70,7 +70,7 @@ export default function LoginModal({ onClose }: Props) {
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 rounded bg-white/5 text-white"
+            className="w-full p-3 rounded-lg bg-white/5 text-white placeholder-white/40 outline-none focus:ring-2 focus:ring-white/30 transition"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -78,7 +78,7 @@ export default function LoginModal({ onClose }: Props) {
             <input
               type="tel"
               placeholder="Телефон"
-              className="w-full p-3 rounded bg-white/5 text-white"
+              className="w-full p-3 rounded-lg bg-white/5 text-white placeholder-white/40 outline-none focus:ring-2 focus:ring-white/30 transition"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -86,7 +86,7 @@ export default function LoginModal({ onClose }: Props) {
           <input
             type="password"
             placeholder="Пароль"
-            className="w-full p-3 rounded bg-white/5 text-white"
+            className="w-full p-3 rounded-lg bg-white/5 text-white placeholder-white/40 outline-none focus:ring-2 focus:ring-white/30 transition"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -97,7 +97,7 @@ export default function LoginModal({ onClose }: Props) {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full mt-6 bg-white text-black py-3 rounded-full font-semibold hover:bg-gray-200 transition"
+          className="w-full mt-6 bg-white text-black py-3 rounded-full font-semibold tracking-wide hover:bg-white/90 transition"
         >
           {loading
             ? isSignup
@@ -111,7 +111,7 @@ export default function LoginModal({ onClose }: Props) {
         <p className="mt-4 text-sm text-white/60 text-center">
           {isSignup ? 'Уже есть аккаунт?' : 'Нет аккаунта?'}{' '}
           <button
-            className="underline"
+            className="underline hover:text-white transition"
             onClick={() => setIsSignup(!isSignup)}
           >
             {isSignup ? 'Войти' : 'Зарегистрироваться'}
@@ -120,7 +120,7 @@ export default function LoginModal({ onClose }: Props) {
 
         <button
           onClick={onClose}
-          className="mt-2 text-sm text-white/60 underline block text-center"
+          className="mt-3 text-sm text-white/60 hover:underline block text-center"
         >
           Отмена
         </button>

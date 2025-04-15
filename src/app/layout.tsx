@@ -22,6 +22,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TopCar",
   description: "Аренда люксовой машины",
+  icons: {
+    icon: '/logo.png',  // Or '/favicon.ico'
+  }, 
 };
 
 export default function RootLayout({
