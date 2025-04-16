@@ -1,11 +1,12 @@
 {
-  "name": "TopCar",
+  "name": "TopCar — Аренда люксовых авто",
   "short_name": "TopCar",
-  "description": "Аренда автомобилей с минималистичным UI",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "description": "Премиум аренда автомобилей. Без компромиссов.",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
@@ -19,3 +20,4 @@
     }
   ]
 }
+
