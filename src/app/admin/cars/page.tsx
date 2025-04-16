@@ -8,10 +8,10 @@ import Image from 'next/image'
 type Car = {
   id: number
   name: string
-  price: number
-  image: string
   brand: string
   class: string
+  price: number
+  image_url: string
 }
 
 export default function AdminCarsPage() {
@@ -22,7 +22,6 @@ export default function AdminCarsPage() {
     brand: '',
     class: '',
     price: '',
-    image: '',
     file: null as File | null,
   })
   const [preview, setPreview] = useState<string | null>(null)
@@ -53,84 +52,90 @@ export default function AdminCarsPage() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      setNewCar((p) => ({ ...p, file }))
+      setNewCar((prev) => ({ ...prev, file }))
       setPreview(URL.createObjectURL(file))
     }
   }
 
   const handleAddCar = async () => {
-    if (!newCar.file) return alert('Загрузите изображение авто')
-
-    const fileExt = newCar.file.name.split('.').pop()
-    const fileName = `${Date.now()}.${fileExt}`
-    const filePath = `cars/${fileName}`
-
-    // Upload image to Supabase Storage
-    const { error: uploadError } = await supabase.storage
-      .from('cars')
-      .upload(filePath, newCar.file)
-
-    if (uploadError) {
-      console.error('Upload error:', uploadError)
+    if (!newCar.name || !newCar.brand || !newCar.class || !newCar.price || !newCar.file) {
+      alert('Пожалуйста, заполните все поля')
       return
     }
 
-    // Insert car record
-    const { data, error } = await supabase.from('cars').insert([
+    const fileExt = newCar.file.name.split('.').pop()
+    const fileName = `${Date.now()}.${fileExt}`
+
+    const { error: uploadError } = await supabase.storage
+      .from('cars')
+      .upload(fileName, newCar.file, { upsert: true })
+
+    if (uploadError) {
+      alert(`Ошибка загрузки: ${uploadError.message}`)
+      return
+    }
+
+    const image_url = `/storage/v1/object/public/cars/${fileName}`
+
+    const { error: insertError } = await supabase.from('cars').insert([
       {
         name: newCar.name,
         brand: newCar.brand,
         class: newCar.class,
         price: parseInt(newCar.price),
-        image: `/storage/v1/object/public/cars/${fileName}`,
+        image_url,
       },
     ])
 
-    if (!error) {
-      setNewCar({ name: '', brand: '', class: '', price: '', image: '', file: null })
+    if (insertError) {
+      alert(`Ошибка добавления в базу: ${insertError.message}`)
+    } else {
+      setNewCar({ name: '', brand: '', class: '', price: '', file: null })
       setPreview(null)
       fetchCars()
     }
   }
 
-  const deleteCar = async (id: number) => {
+  const handleDeleteCar = async (id: number) => {
     const { error } = await supabase.from('cars').delete().eq('id', id)
-    if (!error) setCars((prev) => prev.filter((car) => car.id !== id))
+    if (!error) {
+      setCars((prev) => prev.filter((car) => car.id !== id))
+    }
   }
 
   return (
     <main className="min-h-screen bg-black text-white px-4 py-10 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-extrabold mb-8">🚘 Управление автопарком</h1>
+      <h1 className="text-4xl font-extrabold mb-8">Админ-панель: Автомобили</h1>
 
       <div className="bg-white/5 border border-white/10 rounded-xl p-6 mb-10">
-        <h2 className="text-xl font-semibold mb-4">+ Добавить авто</h2>
+        <h2 className="text-xl font-semibold mb-4">Добавить авто</h2>
         <div className="grid md:grid-cols-5 gap-4">
           <input
             type="text"
             placeholder="Название"
             value={newCar.name}
-            onChange={(e) => setNewCar((p) => ({ ...p, name: e.target.value }))}
+            onChange={(e) => setNewCar({ ...newCar, name: e.target.value })}
             className="bg-black p-3 border border-white/20 rounded-md"
           />
           <input
             type="text"
             placeholder="Марка"
             value={newCar.brand}
-            onChange={(e) => setNewCar((p) => ({ ...p, brand: e.target.value }))}
+            onChange={(e) => setNewCar({ ...newCar, brand: e.target.value })}
             className="bg-black p-3 border border-white/20 rounded-md"
           />
           <input
             type="text"
             placeholder="Класс"
             value={newCar.class}
-            onChange={(e) => setNewCar((p) => ({ ...p, class: e.target.value }))}
+            onChange={(e) => setNewCar({ ...newCar, class: e.target.value })}
             className="bg-black p-3 border border-white/20 rounded-md"
           />
           <input
             type="number"
             placeholder="Цена"
             value={newCar.price}
-            onChange={(e) => setNewCar((p) => ({ ...p, price: e.target.value }))}
+            onChange={(e) => setNewCar({ ...newCar, price: e.target.value })}
             className="bg-black p-3 border border-white/20 rounded-md"
           />
           <input
@@ -161,40 +166,41 @@ export default function AdminCarsPage() {
         </button>
       </div>
 
-      {/* Car List */}
-      {loading ? (
-        <p className="text-white/70">Загрузка...</p>
-      ) : (
-        <ul className="space-y-6">
-          {cars.map((car) => (
-            <li
+      <div className="space-y-6">
+        {loading ? (
+          <p className="text-white/70">Загрузка...</p>
+        ) : cars.length === 0 ? (
+          <p className="text-white/70">Автомобили не найдены.</p>
+        ) : (
+          cars.map((car) => (
+            <div
               key={car.id}
-              className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col sm:flex-row gap-4 items-center justify-between"
+              className="bg-white/5 border border-white/10 rounded-xl p-4 flex justify-between items-center"
             >
               <div className="flex items-center gap-4">
                 <Image
-                  src={car.image}
+                  src={car.image_url}
                   alt={car.name}
                   width={100}
                   height={60}
-                  className="rounded-lg object-cover w-32 h-20"
+                  className="rounded-md object-cover w-28 h-20"
                 />
                 <div>
-                  <p className="font-semibold text-lg">{car.name}</p>
-                  <p className="text-sm text-white/60">{car.brand} — {car.class}</p>
+                  <p className="text-lg font-semibold">{car.name}</p>
+                  <p className="text-sm text-white/60">{car.brand} • {car.class}</p>
                   <p className="text-sm text-white/70">{car.price.toLocaleString()} ₸ / день</p>
                 </div>
               </div>
               <button
-                onClick={() => deleteCar(car.id)}
-                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded-full font-semibold"
+                onClick={() => handleDeleteCar(car.id)}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded-full"
               >
                 Удалить
               </button>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+          ))
+        )}
+      </div>
     </main>
   )
 }

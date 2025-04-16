@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 
+type CarClass = 'Эконом' | 'Бизнес' | 'Премиум' | 'Люкс'
+
 export default function AdminUploadPanel() {
   const [name, setName] = useState('')
   const [price, setPrice] = useState<number | null>(null)
   const [brand, setBrand] = useState('')
-  const [carClass, setCarClass] = useState<'Эконом' | 'Бизнес' | 'Премиум' | 'Люкс'>('Бизнес')
+  const [carClass, setCarClass] = useState<CarClass>('Бизнес')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [message, setMessage] = useState('')
 
@@ -81,7 +83,7 @@ export default function AdminUploadPanel() {
         <select
           className="w-full p-3 bg-black border border-white/20 rounded-md"
           value={carClass}
-          onChange={(e) => setCarClass(e.target.value as any)}
+          onChange={(e) => setCarClass(e.target.value as CarClass)}
         >
           <option value="Эконом">Эконом</option>
           <option value="Бизнес">Бизнес</option>
