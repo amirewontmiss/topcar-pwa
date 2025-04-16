@@ -1,29 +1,34 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function DownloadPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-16 flex flex-col items-center justify-center text-center">
-      <Image src="/logo.png" alt="TopCar Logo" width={64} height={64} className="mb-4" />
-      <h1 className="text-4xl font-extrabold mb-4">Установите TopCar</h1>
-      <p className="text-white/70 max-w-md mb-6">
-        Получите удобный доступ к премиум-аренде авто. Скачайте наше PWA-приложение и получите <span className="text-white font-semibold">скидку 30%</span> на первую аренду!
-      </p>
+    <main className="min-h-screen bg-black text-white flex items-center justify-center px-6 py-12">
+      <div className="bg-white/5 border border-white/10 rounded-2xl p-8 max-w-lg w-full text-center shadow-md backdrop-blur">
+        <Image src="/logo.png" alt="TopCar Logo" width={80} height={80} className="mx-auto mb-4" />
+        <h1 className="text-3xl font-bold mb-2">Установите TopCar</h1>
+        <p className="text-white/70 text-sm mb-6">
+          Добавьте это приложение на главный экран вашего устройства и получите скидку 30% на первую аренду.
+        </p>
 
-      <div className="flex gap-4 flex-wrap justify-center">
-        <a
+        <div className="flex flex-col gap-3">
+          <p className="text-sm text-white/50">
+            Откройте меню браузера и нажмите <strong>“Добавить на главный экран”</strong>
+          </p>
+
+          <p className="text-sm text-white/50">
+            После установки вы сможете использовать TopCar как полноценное приложение.
+          </p>
+        </div>
+
+        <Link
           href="/"
-          className="px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-[#d4af37] hover:text-white transition"
+          className="mt-6 inline-block px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-[#d4af37] hover:text-white transition"
         >
-          Установить сейчас
-        </a>
-        <a
-          href="/"
-          className="px-6 py-3 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-black transition"
-        >
-          Назад
-        </a>
+          Назад на главную
+        </Link>
       </div>
     </main>
   )
