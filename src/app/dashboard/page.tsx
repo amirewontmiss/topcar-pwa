@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import { QRCodeCanvas } from 'qrcode.react'
 import Image from 'next/image'
 
 type Booking = {
@@ -49,7 +50,7 @@ export default function DashboardPage() {
           Добро пожаловать, {user.name || user.phone} 👋
         </h1>
         <button
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/#booking')}
           className="text-sm px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
         >
           + Новое бронирование
@@ -57,6 +58,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
+        {/* Profile Section */}
         <section className="md:col-span-1 bg-white/5 border border-white/10 rounded-xl p-5 shadow-sm">
           <h2 className="text-xl font-semibold mb-4">👤 Профиль</h2>
           <div className="space-y-2 text-white/80">
@@ -66,6 +68,7 @@ export default function DashboardPage() {
           </div>
         </section>
 
+        {/* Bookings Section */}
         <section className="md:col-span-2 bg-white/5 border border-white/10 rounded-xl p-5 shadow-sm">
           <h2 className="text-xl font-semibold mb-4">📅 История бронирований</h2>
 
@@ -86,7 +89,7 @@ export default function DashboardPage() {
                       height={75}
                       className="w-full h-24 object-cover rounded-md col-span-1"
                     />
-                    <div className="col-span-2 sm:col-span-3 space-y-1">
+                    <div className="col-span-2 sm:col-span-2 space-y-1">
                       <p className="text-lg font-semibold">{b.car_name}</p>
                       <p className="text-white/60 text-sm">
                         📅 С {b.date_from} по {b.date_to}
@@ -94,6 +97,15 @@ export default function DashboardPage() {
                       <p className="text-white/40 text-xs">
                         Добавлено: {new Date(b.created_at).toLocaleString()}
                       </p>
+                    </div>
+                    <div className="col-span-1 flex justify-center items-center">
+                      <QRCodeCanvas
+                        value={b.id}
+                        size={64}
+                        bgColor="#000000"
+                        fgColor="#ffffff"
+                        level="H"
+                      />
                     </div>
                   </div>
                 </li>

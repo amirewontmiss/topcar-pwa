@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Logo & About */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Image src="/logo.svg" alt="TopCar Logo" width={36} height={36} />
+            <Image src="/logo.png" alt="TopCar Logo" width={36} height={36} />
             <h3 className="text-xl font-semibold">TOPCAR</h3>
           </div>
           <p className="text-white/60 text-sm max-w-xs">
