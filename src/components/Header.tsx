@@ -33,10 +33,10 @@ export default function Header() {
 
       {/* Desktop Nav */}
       <nav className="hidden lg:flex gap-6 text-sm">
-        <a href="#" className="hover:text-white/80 transition">Автопарк ▾</a>
-        <a href="#" className="hover:text-white/80 transition">Условия ▾</a>
-        <a href="#" className="hover:text-white/80 transition">Услуги ▾</a>
-        <a href="#" className="hover:text-white/80 transition">Контакты</a>
+        <Link href="/autopark" className="hover:text-white/80 transition">Автопарк</Link>
+        <Link href="/terms" className="hover:text-white/80 transition">Terms</Link>
+        <Link href="/services" className="hover:text-white/80 transition">Services</Link>
+        <Link href="/contact" className="hover:text-white/80 transition">Contact</Link>
       </nav>
 
       {/* Right Side */}
@@ -84,10 +84,10 @@ export default function Header() {
               </button>
             </div>
             <nav className="flex flex-col gap-4 text-base font-medium">
-              <a href="#" className="hover:text-white/80 transition">Автопарк</a>
-              <a href="#" className="hover:text-white/80 transition">Условия</a>
-              <a href="#" className="hover:text-white/80 transition">Услуги</a>
-              <a href="#" className="hover:text-white/80 transition">Контакты</a>
+              <Link href="/autopark" className="hover:text-white/80 transition">Автопарк</Link>
+              <Link href="/terms" className="hover:text-white/80 transition">Terms</Link>
+              <Link href="/services" className="hover:text-white/80 transition">Services</Link>
+              <Link href="/contact" className="hover:text-white/80 transition">Contact</Link>
               <Link
                 href="/download"
                 className="mt-6 inline-block px-4 py-2 border border-white text-white rounded-full text-sm font-semibold hover:bg-white hover:text-black transition"
